@@ -1,7 +1,7 @@
 const mongoose = require("mongoose")
 
 const Language = new mongoose.Schema({
-    languages: { type: String, lowercase : true }
+    name : { type: String, lowercase : true }
 });
 
 const languages = mongoose.model("language", Language);
