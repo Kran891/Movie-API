@@ -12,15 +12,18 @@ const user= new users({
     phoneNumber:data.phoneNumber
  })
  await user.save();
- console.log(user);
-    token(user,process.env.KEY,['user','admin'])
+ 
+   
 }
 userService.loginUser=async (data)=>{
     const user=await users.findOne({email:data.email}).select('+password')
     if(VerifyPassword(data.password,user.password)){
-     return token(user)
+      return token(user,process.env.KEY)
     }
    throw new InvalidCredentials("Email or Password id Incorrect")
+}
+userService.getAllUsers= async ()=>{
+   return await users.find({});
 }
 async function HashPassword(password){
    const hash=await argon2.hash(password)
