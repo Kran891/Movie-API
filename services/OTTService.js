@@ -17,4 +17,8 @@ ottService.deleteOTT = async (name) => {
     await otts.deleteOne(ott);
     return otts._id;
 }
+ottService.findOTTByName = async (name) => {
+    const ott = await otts.findOne(name);
+    return ott._id;
+}
 
