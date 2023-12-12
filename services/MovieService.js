@@ -12,6 +12,7 @@ movieService.addNewMovie = async(data)=>{
  console.log(typeId);
  const movie = new movies({
     name:data.name,
+    imageUrl : data.imageUrl,
     rating:data.rating,
     releaseDate:data.releaseDate,
     typeId : typeId
