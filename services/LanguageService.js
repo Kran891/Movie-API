@@ -6,6 +6,10 @@ languageService.addLanguage = async (name) => {
     const language = await languages.create({name:name})
     return language._id;
 }
+languageService.findLanguageByName = async (name) => {
+    const language = await languages.findOne(name);
+    return language._id;
+}
 languageService.deleteLanguage = async (name) => {
     let language = await languages.findOne(name)
     await languages.deleteOne(language);
