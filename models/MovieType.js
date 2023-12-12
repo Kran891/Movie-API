@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const MovieTypeSchema = new mongoose.Schema({
-    name : { type : string, lowercase : true}
+    name : { type : String, lowercase : true}
 });
 
 const movieTypes = mongoose.model("movieType",MovieTypeSchema);
