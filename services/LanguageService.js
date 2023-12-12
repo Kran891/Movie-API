@@ -1,6 +1,6 @@
 const languages = require("../models/Languages");
 
-var languageService;
+var languageService = {Object} ;
 
 languageService.addLanguage = async (name) => {
     const language = await languages.create({name:name})

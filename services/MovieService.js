@@ -4,14 +4,14 @@ const movieServiceLanguage = require("../services/MovieServiceLanguage");
 const movieServiceOTT = require("../services/MovieServiceOTT");
 const movieTypeServiceMovies = require("../services/MovieTypeServiceMovie");
 
-var movieService;
+var movieService = {Object};
 movieService.addNewMovie=async(data)=>{
  await movies.create({
     name:data.name,
     rating:data.rating,
     releaseDate:data.releaseDate
   }).then(async x=>{
-    await movieTypeServiceMovies.addMovieTypeServiceMovies(x._id,data.type);
+    await movieTypeServiceMovies.addMovieTypeServiceMovies(x._id,data.movieType);
     await movieServcieGenres.addMovieGenres(x._id,data.genres);
     await movieServiceLanguage.addMovieLanguages(x._id,data.languages);
     await movieServiceOTT.addMovieOTTs(x._id,data.otts);

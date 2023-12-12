@@ -1,6 +1,6 @@
 const otts = require("../models/OTT");
 
-var ottService;
+var ottService = {Object};
 
 ottService.addOTT = async (name) =>{
     const ott = await otts.create({name : name})

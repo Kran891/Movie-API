@@ -1,9 +1,9 @@
 const genres = require("../models/Genre");
 
-var genreServices;
-genreServices.addGenre=async (name)=>{
+var genreServices = {Object} ;
+genreServices.addGenre = async (name)=>{
  const genre=await genres.create({name:name})
- return genre.Id
+ return genre._id;
 }
 genreServices.findGenreByName=async (name)=>{
     let genre= (await genres.findOne({name:name}))

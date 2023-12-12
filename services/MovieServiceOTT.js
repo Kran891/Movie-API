@@ -1,7 +1,7 @@
 const movieOTTs = require("../models/MovieOTT");
 const ottService = require("../services/OTTService");
 
-var movieServiceOTT;
+var movieServiceOTT = {Object};
 
 movieServiceOTT.addMovieOTTs = async (movieId, otts) => {
     let ottId;

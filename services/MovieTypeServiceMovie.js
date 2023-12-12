@@ -1,7 +1,7 @@
 const movieTypeMovies = require("../models/MovieTypeMovie");
 const movieTypeService = require("../services/MovieTypeService");
 
-var movieTypeServiceMovies;
+var movieTypeServiceMovies = {Object};
 
 movieTypeServiceMovies.addMovieTypeServiceMovies = async (movieId,movieTypeName) => {
     let movieType = await movieTypeService.findMovieTypeByName(movieTypeName);

@@ -1,7 +1,7 @@
 const movieGenres = require("../models/MovieGenre");
 const genreServices = require("./GenreService");
 
-var movieServcieGenres;
+var movieServcieGenres = {Object};
 movieServcieGenres.addMovieGenres = async (movieId, genrenames) => {
     let genre;
     genrenames.forEach(async element => {

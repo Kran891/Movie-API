@@ -1,7 +1,7 @@
 const movieLanguages = require("../models/MovieLanguage");
 const languageService = require("../services/LanguageService");
 
-var movieServiceLanguage;
+var movieServiceLanguage = {Object};
 
 movieServiceLanguage.addMovieLanguages = async (movieId,languageNames) => {
     let language;
