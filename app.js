@@ -13,7 +13,7 @@ mongoose.connect("mongodb://localhost:27017/"+process.env.DBNAME)
 app.use(bodyParser.json())
 app.use(cookieParser())
 app.use("/",homeController)
-app.use("/user",userController)
+app.use("/users",userController)
 app.listen(process.env.PORT,()=>{
     console.log("Running on PORT =>",process.env.PORT);
 })

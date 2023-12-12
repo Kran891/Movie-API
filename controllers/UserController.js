@@ -11,4 +11,8 @@ userController.route("/")
         res.status(401).send(err.message)
     }
 })
+.get(async function(req,res){
+    const token=req.cookies.token
+    res.json({token})
+})
 module.exports=userController
