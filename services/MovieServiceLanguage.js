@@ -1,7 +1,7 @@
 const movieLanguages = require("../models/MovieLanguage");
 const languageService = require("../services/LanguageService");
 
-var movieServiceLanguage = {Object};
+var movieServiceLanguage = {};
 
 movieServiceLanguage.addMovieLanguages = async (movieId,languageNames) => {
     let language;
@@ -14,8 +14,12 @@ movieServiceLanguage.addMovieLanguages = async (movieId,languageNames) => {
     });
 };
 movieServiceLanguage.addMovieLanguage = async (movieId,languageId) => {
-    return (await movieLanguages.create({
+    const movieLanguage =  new movieLanguages({
         movieId : movieId,
         languageId : languageId
-    }))._id
+    })
+    await movieLanguage.save();
+    return movieLanguage._id;
 }
+
+module.exports = movieServiceLanguage;
