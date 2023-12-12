@@ -16,3 +16,4 @@ movieServcieGenres.addMovieGenres = async (movieId, genrenames) => {
 movieServcieGenres.addMovieGenre = async (movieId, genreId) => {
     return await (await movieGenres.create({ movieId: movieId, genreId: genreId }))._id
 }
+module.exports=movieServcieGenres
