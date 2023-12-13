@@ -1,4 +1,5 @@
-const express=require("express")
+const express=require("express");
+const genreService = require("../services/GenreService");
 const homeController=express.Router();
 homeController.route("/")
 .get(async function(req,res){
@@ -19,8 +20,12 @@ const data = {
 };
 
 homeController.route("/createmovie").post(async  (req,res) => {
-    debugger
     const da = await movieServices.addNewMovie(data)
+    res.json(da)
+})
+
+homeController.route("/findmovies").post(async  (req,res) => {
+    const da = await genreService.findMovieByGenreName("action");
     res.json(da)
 })
 module.exports=homeController

@@ -5,7 +5,7 @@ const MovieSchema = new mongoose.Schema({
    releaseDate: Date,
    imageUrl : {type:String, lowercase:true},
    rating: { type: Number, min: 0, max: 5 },
-   typeId: {type: mongoose.Schema.Types.ObjectId, ref:"movieType", required:true}
+   typeId: {type: mongoose.Schema.Types.ObjectId, ref:"movietype", required:true}
 })
 const movies = mongoose.model("movie", MovieSchema)
 module.exports = movies

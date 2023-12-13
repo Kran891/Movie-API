@@ -18,4 +18,11 @@ movieGenreService.addMovieGenres = async (movieId, genrenames) => {
 movieGenreService.addMovieGenre = async (movieId, genreId) => {
     return await (new movieGenres({ movieId: movieId, genreId: genreId }).save())._id
 }
+
+// movieGenreService.findMovieByGenreName = async (name) => {
+//     let genreId = await genreServices.findGenreByName(name);
+//     let movies = await movieGenres.find({genreId:genreId}).populate('movieId')
+//     console.log(movies);
+//     return movies;
+// } 
 module.exports=movieGenreService
