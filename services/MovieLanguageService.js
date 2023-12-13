@@ -21,5 +21,11 @@ movieLanguageService.addMovieLanguage = async (movieId,languageId) => {
     await movieLanguage.save();
     return movieLanguage._id;
 }
+movieLanguageService.getMoviesByLanguage=async(name)=>{
+    const Id=await languageService.findLanguageByName(name);
+    
+    const data=await movieLanguages.find({languageId:Id},{movieId:1}).populate('movieId');
+    return data
 
+}
 module.exports = movieLanguageService;

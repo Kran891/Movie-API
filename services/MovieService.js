@@ -1,8 +1,8 @@
 const movies = require("../models/Movie");
-const movieServcieGenres = require("./MovieServiceGenre");
-const movieServiceLanguage = require("../services/MovieServiceLanguage");
-const movieServiceOTT = require("../services/MovieServiceOTT");
-const movieTypeServiceMovies = require("../services/MovieTypeServiceMovie");
+const movieGenreService = require("./MovieGenreService");
+const movieLanguageService = require("../services/MovieLanguageService");
+const movieOTTService = require("../services/MovieOTTService");
+
 const movieTypeService = require("../services/MovieTypeService");
 
 var movieService = {};
@@ -18,9 +18,9 @@ movieService.addNewMovie = async(data)=>{
     typeId : typeId
   });
   await movie.save();
-    await movieServcieGenres.addMovieGenres(movie._id,data.genres);
-    await movieServiceLanguage.addMovieLanguages(movie._id,data.languages);
-    await movieServiceOTT.addMovieOTTs(movie._id,data.otts);
+    await movieGenreService.addMovieGenres(movie._id,data.genres);
+    await movieLanguageService.addMovieLanguages(movie._id,data.languages);
+    await movieOTTService.addMovieOTTs(movie._id,data.otts);
 }
 movieService.addType = async (name) => {
   let movieType = await movieTypeService.findMovieTypeByName(name);
