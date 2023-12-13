@@ -17,9 +17,9 @@ movieService.addNewMovie = async(data)=>{
     typeId : typeId
   });
   await movie.save();
-    await movieServcieGenres.addMovieGenres(movie._id,data.genres);
-    await movieServiceLanguage.addMovieLanguages(movie._id,data.languages);
-    await movieServiceOTT.addMovieOTTs(movie._id,data.otts);
+    await movieGenreService.addMovieGenres(movie._id,data.genres);
+    await movieLanguageService.addMovieLanguages(movie._id,data.languages);
+    await movieOTTService.addMovieOTTs(movie._id,data.otts);
 }
 movieService.addType = async (name) => {
   let movieType = await movieTypeService.findMovieTypeByName(name);
@@ -35,6 +35,7 @@ movieService.findMovieById = async (id) => {
     return null;
   }
   return movie;
+}
 };
 
 movieService.findMoviesByLanguageByType = async (movieType,languageName) => {
