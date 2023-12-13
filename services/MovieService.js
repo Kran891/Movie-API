@@ -1,8 +1,7 @@
 const movies = require("../models/Movie");
-const movieServcieGenres = require("./MovieServiceGenre");
-const movieServiceLanguage = require("../services/MovieServiceLanguage");
-const movieServiceOTT = require("../services/MovieServiceOTT");
-const movieTypeServiceMovies = require("../services/MovieTypeServiceMovie");
+const movieServcieGenres = require("../services/MovieGenreService");
+const movieServiceLanguage = require("../services/MovieLanguageService");
+const movieServiceOTT = require("../services/OTTService");
 const movieTypeService = require("../services/MovieTypeService");
 
 var movieService = {};
@@ -36,5 +35,13 @@ movieService.findMovieById = async (id) => {
     return null;
   }
   return movie;
-}
+};
+
+movieService.findMoviesByLanguageByType = async (movieType,languageName) => {
+  let movieTypeId = await movieTypeService.findMovieTypeByName(movieType);
+  let moviesList = await movieServiceLanguage.findMoviesByLanguageName(languageName);
+  moviesList.filter(x => x.movieId.typeId === movieTypeId);
+  return moviesList;
+};
+
 module.exports = movieService;
