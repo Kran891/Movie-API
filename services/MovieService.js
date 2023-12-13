@@ -38,7 +38,12 @@ movieService.findMovieById = async (id) => {
   return movie;
 }
 movieService.getAllMovies=async ()=>{
-  let movie=await movies.find({releaseDate:{$lte:new Date().getDate()}})
+  let movie=await movies.find({releaseDate:{$lte:new Date()}}).sort({releaseDate:'desc'})
+  return movie
+}
+movieService.getUpcomingMovies=async ()=>{
+  let movie=await movies.find({releaseDate:{$gte:new Date()}}).sort({releaseDate:'asc'})
+  return movie
 }
 movieService.findMoviesByLanguageByType = async (movieType,languageName) => {
   let movieTypeId = await movieTypeService.findMovieTypeByName(movieType);
