@@ -23,13 +23,12 @@ movieLanguageService.addMovieLanguage = async (movieId,languageId) => {
 }
 movieLanguageService.getMoviesByLanguage=async(name)=>{
     const Id=await languageService.findLanguageByName(name);
-    movieLanguageService.findMoviesByLanguageName = async (name) =>{
-    let languageId = await languageService.findLanguageByName(name);
-    let movieIds = await movieLanguages.find({languageId:languageId},{_id:0,movieId:1}).populate('movieId')
-    return movieIds;
-}
     const data=await movieLanguages.find({languageId:Id},{movieId:1}).populate('movieId');
     return data
-
+}
+movieLanguageService.findMoviesByLanguageName = async (name) =>{
+    let languageId = await languageService.findLanguageByName(name);
+    let movieIds = await movieLanguages.find({languageId:languageId}).populate('movieId')
+    return movieIds;
 }
 module.exports = movieLanguageService;

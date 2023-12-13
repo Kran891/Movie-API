@@ -42,8 +42,9 @@ movieService.getAllMovies=async ()=>{
 }
 movieService.findMoviesByLanguageByType = async (movieType,languageName) => {
   let movieTypeId = await movieTypeService.findMovieTypeByName(movieType);
-  let moviesList = await movieServiceLanguage.findMoviesByLanguageName(languageName);
-  moviesList.filter(x => x.movieId.typeId === movieTypeId);
+  console.log("m",movieTypeId);
+  let moviesList = await movieLanguageService.findMoviesByLanguageName(languageName);
+  moviesList = moviesList.filter(x => x.movieId.typeId.equals(movieTypeId._id));
   return moviesList;
 };
 module.exports = movieService;
