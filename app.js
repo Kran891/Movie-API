@@ -6,6 +6,8 @@ const homeController = require('./controllers/HomeController')
 const userController = require('./controllers/UserController')
 const languageController = require('./controllers/LanguageController')
 const movieController = require('./controllers/MovieController')
+const genreController = require('./controllers/GenreController')
+const movieTypeController = require('./controllers/MovieTypeController')
 
 require('dotenv').config();
 
@@ -18,6 +20,8 @@ app.use("/",homeController)
 app.use("/users",userController)
 app.use("/languages",languageController)
 app.use("/movies",movieController)
+app.use("/genres",genreController)
+app.use("/movietypes",movieTypeController)
 app.listen(process.env.PORT,()=>{
     console.log("Running on PORT =>",process.env.PORT);
 })
