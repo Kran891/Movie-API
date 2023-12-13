@@ -23,7 +23,6 @@ userRolesService.getAllRoles=async (userId)=>{
   const roles=await userRoles.find({userId:userId},{roleId:1}).populate("roleId");
   const data=[]
   roles.forEach(element => {
-    
     data.push(element.roleId.role)
   });
 return data
