@@ -1,9 +1,9 @@
 const movieOTTs = require("../models/MovieOTT");
-const ottService = require("../services/OTTService");
+const ottService = require("./OTTService");
 
-var movieServiceOTT = {};
+var movieOTTService = {};
 
-movieServiceOTT.addMovieOTTs = async (movieId, otts) => {
+movieOTTService.addMovieOTTs = async (movieId, otts) => {
     let ottId;
     let url;
     otts.forEach(async element => {
@@ -12,13 +12,13 @@ movieServiceOTT.addMovieOTTs = async (movieId, otts) => {
         if(!ottId){
             ottId = await ottService.addOTT(element.name);
         }
-        movieServiceOTT.addMovieOTT(movieId,ottId,url);
+        movieOTTService.addMovieOTT(movieId,ottId,url);
     });
 }
-movieServiceOTT.addMovieOTT = async (movieId, ottId, movieUrl) => {
+movieOTTService.addMovieOTT = async (movieId, ottId, movieUrl) => {
     const movieOTT= new movieOTTs({ movieId: movieId, ottId: ottId, movieUrl: movieUrl });
     await movieOTT.save();
     return movieOTT._id;
 }
 
-module.exports = movieServiceOTT;
+module.exports = movieOTTService;
