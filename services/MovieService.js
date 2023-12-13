@@ -29,4 +29,12 @@ movieService.addType = async (name) => {
   }
   return movieType;
 }
+
+movieService.findMovieById = async (id) => {
+  let movie = await movies.findOne({_id:id},{_id:1})
+  if(movie === null){
+    return null;
+  }
+  return movie;
+}
 module.exports = movieService;
