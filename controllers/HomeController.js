@@ -8,18 +8,7 @@ homeController.route("/")
     res.send("<center><h1>Conntected to MovieBuzz API</h1></center>")
 });
 
-const data = {
-    name : "Animal",
-    releaseDate : "01-12-2023",
-    rating : 4,
-    movieType : "movie",
-    genres : ["Action"],
-    languages : ["Telugu"],
-    otts : [{
-        name : "Netfilx",
-        url : "https://www.netflix.com/" 
-    }]
-};
+
 
 homeController.route("/createmovie").post(async  (req,res) => {
     const da = await movieService.addNewMovie(data)

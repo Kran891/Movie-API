@@ -5,6 +5,7 @@ const cookieParser=require('cookie-parser')
 const homeController = require('./controllers/HomeController')
 const userController = require('./controllers/UserController')
 const languageController = require('./controllers/LanguageController')
+const movieController = require('./controllers/MovieController')
 
 require('dotenv').config();
 
@@ -16,6 +17,7 @@ app.use(cookieParser())
 app.use("/",homeController)
 app.use("/users",userController)
 app.use("/languages",languageController)
+app.use("/movies",movieController)
 app.listen(process.env.PORT,()=>{
     console.log("Running on PORT =>",process.env.PORT);
 })

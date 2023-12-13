@@ -3,7 +3,7 @@ const genreServices = require("./GenreService");
 
 var movieGenreService = {};
 movieGenreService.addMovieGenres = async (movieId, genrenames) => {
-   
+   console.log(genrenames);
     genrenames.forEach(async element => {
         let genre = await genreServices.findGenreByName(element)
         
