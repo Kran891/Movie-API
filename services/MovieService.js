@@ -35,7 +35,6 @@ movieService.findMovieById = async (id) => {
     return null;
   }
   return movie;
-}
 };
 
 movieService.findMoviesByLanguageByType = async (movieType,languageName) => {
