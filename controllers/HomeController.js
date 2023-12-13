@@ -18,9 +18,9 @@ const data = {
     }]
 };
 
-homeRouter.route("/createmovie").post(async  (req,res) => {
+homeController.route("/createmovie").post(async  (req,res) => {
     debugger
     const da = await movieServices.addNewMovie(data)
     res.json(da)
 })
-module.exports=homeRouter
+module.exports=homeController

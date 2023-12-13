@@ -8,4 +8,11 @@ rolesService.addNewRole=async (name)=>{
         }
     )
     await role.save();
+    return role._id;
 }
+rolesService.findRoleByName=async (name)=>{
+    const roleId=await roles.findOne({role:name},{_id:1});
+    return roleId;
+}
+
+module.exports=rolesService;

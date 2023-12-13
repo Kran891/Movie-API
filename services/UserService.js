@@ -2,6 +2,7 @@ const argon2=require('argon2')
 const users = require("../models/User");
 const InvalidCredentials = require('./InvalidCredentials');
 const { token } = require('./JWTService');
+const userRolesService = require('./UserRolesService');
 require('dotenv').config();
 var userService={};
 userService.addNewUser=async function(data){
@@ -12,13 +13,15 @@ const user= new users({
     phoneNumber:data.phoneNumber
  })
  await user.save();
- 
-   
+ await  userRolesService.addUserRoles(user._id,data.roles)
+ return await token(user,process.env.KEY,data.roles)  
 }
 userService.loginUser=async (data)=>{
     const user=await users.findOne({email:data.email}).select('+password')
     if(VerifyPassword(data.password,user.password)){
-      return token(user,process.env.KEY)
+      const roles=await userRolesService.getAllRoles(user._id)
+      
+      return await token(user,process.env.KEY,roles)
     }
    throw new InvalidCredentials("Email or Password id Incorrect")
 }
