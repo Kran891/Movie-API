@@ -16,4 +16,7 @@ languageService.deleteLanguage = async (name) => {
     await languages.deleteOne(language);
     return language._id;
 }
+languageService.getAllLanguages=async()=>{
+    return await languages.find({},{name:1,_id:0})
+}
 module.exports = languageService
