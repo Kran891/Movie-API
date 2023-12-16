@@ -9,11 +9,12 @@ userService.addNewUser=async function(data){
 const user= new users({
     username:data.email.split('@')[0],
     email:data.email,
-    password:await HashPassword(data.password),
-    phoneNumber:data.phoneNumber
+    name:data.name,
+    password:await HashPassword(data.password)
+   //  phoneNumber:data.phoneNumber
  })
  await user.save();
- await  userRolesService.addUserRoles(user._id,data.roles)
+ await  userRolesService.addUserRoles(user._id,["user"])
  return await token(user,process.env.KEY,data.roles)  
 }
 userService.loginUser=async (data)=>{
