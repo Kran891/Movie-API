@@ -7,6 +7,7 @@ genreServices.addGenre = async (name) => {
     console.log(genre);
     return genre._id;
 }
+
 genreServices.findGenreByName = async (name) => {
     let genre = (await genres.findOne({ name: name }, { _id: 1 }))
     return genre

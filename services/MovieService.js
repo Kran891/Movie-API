@@ -38,16 +38,24 @@ movieService.findMovieById = async (id) => {
   return movie;
 }
 movieService.getAllMovies=async ()=>{
-  let movie=await movies.find({releaseDate:{$lte:new Date()}}).sort({releaseDate:'desc'})
-  return movie
+  let movieList=await movies.find({releaseDate:{$lte:new Date()}}).sort({releaseDate:'desc'}).populate("typeId")
+  return await getAllMovies(movieList)
+}
+async function getAllMovies(movieList){
+  for (let index = 0; index < movieList.length; index++) {
+    movieList[index].genres=await movieGenreService.getGenresByMovieId(movieList[index]._id);
+    movieList[index].languages=await movieLanguageService.findLanuagesByMovieId(movieList[index]._id)
+  }
+  
+  return movieList;
 }
 movieService.getUpcomingMovies=async ()=>{
-  let movie=await movies.find({releaseDate:{$gte:new Date()}}).sort({releaseDate:'asc'})
-  return movie
+  let movieList=await movies.find({releaseDate:{$gte:new Date()}}).sort({releaseDate:'asc'}).populate("typeId")
+  return getAllMovies(movieList);
 }
 movieService.findMoviesByLanguageByType = async (movieType,languageName) => {
   let movieTypeId = await movieTypeService.findMovieTypeByName(movieType);
-  console.log("m",movieTypeId);
+  
   let moviesList = await movieLanguageService.findMoviesByLanguageName(languageName);
   moviesList = moviesList.filter(x => x.movieId.typeId.equals(movieTypeId._id));
   return moviesList;

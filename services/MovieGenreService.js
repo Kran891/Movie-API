@@ -18,7 +18,10 @@ movieGenreService.addMovieGenres = async (movieId, genrenames) => {
 movieGenreService.addMovieGenre = async (movieId, genreId) => {
     return await (new movieGenres({ movieId: movieId, genreId: genreId }).save())._id
 }
-
+movieGenreService.getGenresByMovieId=async(movieId)=>{
+    const genresList=await movieGenres.find({movieId:movieId},{genreId:1,_id:0}).populate("genreId");
+    return genresList.map(x=>x.genreId.name)
+}
 movieGenreService.findMovieByGenreName = async (name) => {
     let genreId = await genreServices.findGenreByName(name);
     let movies = await movieGenres.find({genreId:genreId},{movieId:1}).populate('movieId')
