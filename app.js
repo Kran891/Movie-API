@@ -32,5 +32,5 @@ app.use("/movietypes",movieTypeController)
 app.use("/types",typeController)
 app.listen(process.env.PORT,()=>{
     console.log("Running on PORT =>",process.env.PORT);
-    console.log("http://localhost:5050/");
+    console.log(`http://localhost:${process.env.PORT}/`);
 })
