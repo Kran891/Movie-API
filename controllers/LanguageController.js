@@ -10,4 +10,8 @@ languageController.route("/:name")
 .get(async function(req,res) {
     res.json(await movieLanguageService.getMoviesByLanguage(req.params.name))
 })
+languageController.route("/languagesbymovieid/:id")
+.get(async (req,res) => {
+    res.json(await movieLanguageService.findLanuagesByMovieId(req.params.id))
+})
 module.exports=languageController;

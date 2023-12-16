@@ -31,4 +31,12 @@ movieLanguageService.findMoviesByLanguageName = async (name) =>{
     let movieIds = await movieLanguages.find({languageId:languageId}).populate('movieId')
     return movieIds;
 }
+movieLanguageService.findLanuagesByMovieId = async (id) => {
+    let languages = await movieLanguages.find({movieId:id},{_id:0,languageId:1}).populate('languageId')
+    let languageNames = [];
+    languages.forEach(language => {
+        languageNames.push(language.languageId.name);
+    });
+    return languageNames;
+}
 module.exports = movieLanguageService;
