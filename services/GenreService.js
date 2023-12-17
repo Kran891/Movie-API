@@ -13,8 +13,8 @@ genreServices.findGenreByName = async (name) => {
     return genre
 }
 genreServices.getAllGenres = async() => {
-    let genresList = await genres.find({},{_id:1}) 
-    return genresList
+    let genresList = await genres.find({},{name:1}) 
+    return await genresList.map(x=>x.name);
 }
 module.exports = genreServices
 
