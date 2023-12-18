@@ -46,6 +46,7 @@ async function getAllMovies(movieList){
   for (let index = 0; index < movieList.length; index++) {
     movieList[index].genres=await movieGenreService.getGenresByMovieId(movieList[index]._id);
     movieList[index].languages=await movieLanguageService.findLanuagesByMovieId(movieList[index]._id)
+    movieList[index].ott=await movieOTTService.getMovieOttByMovieId(movieList[index]._id)
   }
   
   return movieList;

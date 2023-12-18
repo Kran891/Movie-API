@@ -9,7 +9,8 @@ const MovieSchema = new mongoose.Schema({
    typeId: {type: mongoose.Schema.Types.ObjectId, ref:"movietype", required:true},
    genres:[String],
    languages:[String],
-   description:String
+   description:String,
+   ott:{}
 })
 const movies = mongoose.model("movie", MovieSchema)
 module.exports = movies

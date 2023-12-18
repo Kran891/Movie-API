@@ -19,5 +19,8 @@ movieOTTService.addMovieOTT = async (movieId, ottId, movieUrl) => {
     await movieOTT.save();
     return movieOTT._id;
 }
+movieOTTService.getMovieOttByMovieId=async(movieId)=>{
+    return await movieOTTs.findOne({movieId:movieId},{movieUrl:1,ottId:1}).populate('ottId');
+}
 
 module.exports = movieOTTService;
