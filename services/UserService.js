@@ -29,11 +29,29 @@ userService.loginUser=async (data)=>{
 userService.getAllUsers= async ()=>{
    return await users.find({});
 }
+userService.findUserById = async (id) =>{
+   return await users.findOne({_id:id});
+}
 async function HashPassword(password){
    const hash=await argon2.hash(password)
    return hash;
 }
 async function VerifyPassword(password,hash) {
     await argon2.verify(hash,password).then(res=>{return res})
+}
+
+userService.changePassword = async (data) => {
+   const user = await users.findOne({_id:data.userId}).select('+password')
+   console.log("user",user);
+   if(VerifyPassword(data.password,user.password)){
+      user.password = await HashPassword(data.newPassword);
+      return await users.updateOne(user);
+   }
+}
+userService.updateUser = async (data) => {
+   const user = await users.findOne({_id:data._id}).select('+password')
+   user.name = data.name;
+   user.email = data.email;
+   return await users.updateOne(user);
 }
 module.exports=userService;

@@ -17,12 +17,13 @@ const app=express();
 
 mongoose.connect("mongodb://localhost:27017/"+process.env.DBNAME)
 app.use(bodyParser.json())
+app.use(cookieParser())
 app.use(cors({
     origin: '*',
     methods: '*',
     credentials: true, // You can include this line if you want to allow credentials (cookies) to be sent with the request
   }));
-app.use(cookieParser())
+
 app.use("/",homeController)
 app.use("/users",userController)
 app.use("/languages",languageController)
