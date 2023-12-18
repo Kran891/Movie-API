@@ -8,7 +8,7 @@ movieController.route("/")
     res.json(await movieService.getAllMovies());
 })
 .post(async function(req,res){
-   
+   console.log(req.body);
     res.json(movieService.addNewMovie(req.body))
 })
 movieController.route("/upcoming")

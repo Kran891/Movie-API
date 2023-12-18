@@ -15,12 +15,13 @@ movieService.addNewMovie = async(data)=>{
     imageUrl : data.imageUrl,
     rating:data.rating,
     releaseDate:data.releaseDate,
-    typeId : typeId
+    typeId : typeId,
+    description:data.description
   });
   await movie.save();
     await movieGenreService.addMovieGenres(movie._id,data.genres);
     await movieLanguageService.addMovieLanguages(movie._id,data.languages);
-    await movieOTTService.addMovieOTTs(movie._id,data.otts);
+    await movieOTTService.addMovieOTTs(movie._id,data.ott);
 }
 movieService.addType = async (name) => {
   let movieType = await movieTypeService.findMovieTypeByName(name);

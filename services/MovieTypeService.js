@@ -16,7 +16,7 @@ movieTypeServices.deleteMovieType = async (name) => {
     return movieType._id;
 }
 movieTypeServices.getAllMovieTypes = async () => {
-    let movieTypeList = await movieTypes.find({},{_id:1})
-    return movieTypeList;
+    let movieTypeList = await movieTypes.find({name:1})
+    return await movieTypeList.map(x=>x.name);
 }
 module.exports = movieTypeServices

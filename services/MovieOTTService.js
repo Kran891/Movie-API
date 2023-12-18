@@ -3,17 +3,16 @@ const ottService = require("./OTTService");
 
 var movieOTTService = {};
 
-movieOTTService.addMovieOTTs = async (movieId, otts) => {
+movieOTTService.addMovieOTTs = async (movieId, ott) => {
     let ottId;
     let url;
-    otts.forEach(async element => {
-        ottId = await ottService.findOTTByName(element.name);
-        url = element.url;
+  
+        ottId = await ottService.findOTTByName(ott.name);
+        url = ott.url;
         if(!ottId){
-            ottId = await ottService.addOTT(element.name);
+            ottId = await ottService.addOTT(ott.name);
         }
         movieOTTService.addMovieOTT(movieId,ottId,url);
-    });
 }
 movieOTTService.addMovieOTT = async (movieId, ottId, movieUrl) => {
     const movieOTT= new movieOTTs({ movieId: movieId, ottId: ottId, movieUrl: movieUrl });
