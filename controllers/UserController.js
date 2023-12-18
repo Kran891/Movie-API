@@ -18,7 +18,38 @@ userController.route("/")
 })
 userController.route("/login")
 .post(async function(req,res){
-    res.cookie("token",await userService.loginUser(req.body))
-    res.json("Login Succes");
+    const {token,id} = await userService.loginUser(req.body);
+    res.cookie("token",token,{sameSite: 'None' });
+    res.cookie("id",id, {sameSite: 'None'});
+    res.json({token,id});
 })
+userController.route("/changepassword") 
+.post(async (req,res) => {
+    try {
+        const data = req.body;
+        res.json(await userService.changePassword(data));
+    } catch (err) {
+        res.status(401).send(err.message);
+    }
+})
+userController.route("/updateuser")
+.post(authenticateRole("user"),async (req,res) => {
+    try {
+        res.json(await userService.updateUser(req.body));
+    } catch (err) {
+        res.status(401).send(err.message);
+    }
+})
+userController.route("/getuser")
+.post( authenticateRole("user"),
+    async (req,res) =>  {
+        try {
+            const userId = req.body.userId;
+            res.json(await userService.findUserById(userId));
+        } catch (err) {
+            res.status(401).send(err.message);
+        }
+}
+
+)
 module.exports=userController
