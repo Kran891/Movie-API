@@ -23,7 +23,9 @@ userController.route("/login")
     res.json({token,id,roles});
     }
     catch(err){
-        res.status(401).send(err.message)
+        res.status(401);
+        res.write(err.message);
+        res.send();
     }
 })
 userController.route("/changepassword") 
