@@ -32,11 +32,17 @@ movieService.addType = async (name) => {
 }
 
 movieService.findMovieById = async (id) => {
-  let movie = await movies.findOne({_id:id},{_id:1})
+  let movie = await movies.findOne({_id:id}).populate("typeId")
   if(movie === null){
     return null;
   }
-  return movie;
+  return await fillMovie(movie)
+}
+async function fillMovie(movie) {
+  movie.genres=await movieGenreService.getGenresByMovieId(movie._id);
+  movie.languages=await movieLanguageService.findLanuagesByMovieId(movie._id)
+  movie.ott=await movieOTTService.getMovieOttByMovieId(movie._id)
+ return movie;
 }
 movieService.getAllMovies=async ()=>{
   let movieList=await movies.find({releaseDate:{$lte:new Date()}}).sort({releaseDate:'desc'}).populate("typeId")
@@ -44,9 +50,7 @@ movieService.getAllMovies=async ()=>{
 }
 async function getAllMovies(movieList){
   for (let index = 0; index < movieList.length; index++) {
-    movieList[index].genres=await movieGenreService.getGenresByMovieId(movieList[index]._id);
-    movieList[index].languages=await movieLanguageService.findLanuagesByMovieId(movieList[index]._id)
-    movieList[index].ott=await movieOTTService.getMovieOttByMovieId(movieList[index]._id)
+    movieList[index]=await fillMovie(movieList[index])
   }
   
   return movieList;
