@@ -18,10 +18,13 @@ userController.route("/")
 })
 userController.route("/login")
 .post(async function(req,res){
-    const {token,id} = await userService.loginUser(req.body);
-    res.cookie("token",token,{sameSite: 'None' });
-    res.cookie("id",id, {sameSite: 'None'});
+    try{
+        const {token,id} = await userService.loginUser(req.body);
     res.json({token,id});
+    }
+    catch(err){
+        res.status(401).send(err.message)
+    }
 })
 userController.route("/changepassword") 
 .post(async (req,res) => {

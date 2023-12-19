@@ -19,7 +19,7 @@ const user= new users({
 }
 userService.loginUser=async (data)=>{
     const user=await users.findOne({email:data.email}).select('+password')
-    if(VerifyPassword(data.password,user.password)){
+    if(await VerifyPassword(data.password,user.password)){
       const roles=await userRolesService.getAllRoles(user._id)
       
       return await token(user,process.env.KEY,roles)
@@ -37,7 +37,9 @@ async function HashPassword(password){
    return hash;
 }
 async function VerifyPassword(password,hash) {
-    await argon2.verify(hash,password).then(res=>{return res})
+    const res = await argon2.verify(hash,password);
+    console.log(res);
+    return res;
 }
 
 userService.changePassword = async (data) => {
