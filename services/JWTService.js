@@ -4,7 +4,9 @@ require('dotenv').config();
 
 const token = (user, key, roles) => {
     return {token:jwt.sign({ id: user._id, roles: roles }, key, { expiresIn: '1h' }),
-            id:user._id};
+            id:user._id,
+            roles:roles
+            };
 }
 
 

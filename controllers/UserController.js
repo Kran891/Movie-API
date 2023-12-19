@@ -19,8 +19,8 @@ userController.route("/")
 userController.route("/login")
 .post(async function(req,res){
     try{
-        const {token,id} = await userService.loginUser(req.body);
-    res.json({token,id});
+        const {token,id,roles} = await userService.loginUser(req.body);
+    res.json({token,id,roles});
     }
     catch(err){
         res.status(401).send(err.message)
