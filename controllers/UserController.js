@@ -5,10 +5,10 @@ const userController=express.Router()
 userController.route("/")
 .post(async function(req,res) {
     try{
-    const token=await userService.addNewUser(req.body)
+    const {token,id,roles} = await userService.addNewUser(req.body)
     
     res.cookie("token",token,{httpOnly:true})
-    res.json("User Created");
+    res.json({token,id,roles});
     }catch(err){
         res.status(401).send(err.message)
     }

@@ -13,5 +13,9 @@ languageController.route("/:name")
 languageController.route("/languagesbymovieid/:id")
 .get(async (req,res) => {
     res.json(await movieLanguageService.findLanuagesByMovieId(req.params.id))
+});
+languageController.route("/addlanguage")
+.post(async function(req,res) {
+    res.json(await languageService.addLanguage(req.body.name))
 })
 module.exports=languageController;
