@@ -14,15 +14,15 @@ const user= new users({
    //  phoneNumber:data.phoneNumber
  })
  await user.save();
- await  userRolesService.addUserRoles(user._id,["user"])
- return await token(user,process.env.KEY,data.roles)  
+ await  userRolesService.addUserRoles(user._id,"user")
+ return await token(user,process.env.KEY,'user')  
 }
 userService.loginUser=async (data)=>{
     const user=await users.findOne({email:data.email}).select('+password')
     if(await VerifyPassword(data.password,user.password)){
-      const roles=await userRolesService.getAllRoles(user._id)
+      const role=await userRolesService.getUserRole(user._id)
       
-      return await token(user,process.env.KEY,roles)
+      return await token(user,process.env.KEY,role)
     }
    throw new InvalidCredentials("Email or Password id Incorrect")
 }

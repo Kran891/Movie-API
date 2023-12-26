@@ -25,7 +25,7 @@ function authenticateRole(role) {
 
             const userRoles = decoded.roles;
 
-            if (userRoles && userRoles.includes(role)) {
+            if (userRoles && userRoles === 'user') {
                 next();
             } else {
                 res.status(403).json({ error: 'Forbidden' });
