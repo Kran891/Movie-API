@@ -45,8 +45,16 @@ async function fillMovie(movie) {
  return movie;
 }
 movieService.getAllMovies=async ()=>{
-  let movieList=await movies.find({releaseDate:{$lte:new Date()}}).sort({releaseDate:'desc'}).populate("typeId")
+  let movieList;
+  movieList=await movies.find({releaseDate:{$lte:new Date()}}).sort({releaseDate:'desc'}).populate("typeId")
   return await getAllMovies(movieList)
+}
+movieService.getAllMoviesByUserId=async (uid)=>{
+  let moviesList=await getAllMovies();
+  moviesList=await getAllMovies(moviesList)
+}
+async function getWishListStatus(movieId){
+  return movieId;
 }
 async function getAllMovies(movieList){
   for (let index = 0; index < movieList.length; index++) {
