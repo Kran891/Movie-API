@@ -1,0 +1,12 @@
+version: '3.4'
+
+services:
+  movieapi:
+    image: movieapi
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    environment:
+      NODE_ENV: production
+    ports:
+      - 5050:5050
