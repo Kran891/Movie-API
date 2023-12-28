@@ -1,4 +1,5 @@
 const express=require('express');
+const upload = require('../filehandle');
 const { authenticateRole } = require('../services/JWTService');
 const movieService = require('../services/MovieService');
 const typeService = require('../services/TypeService');
@@ -7,9 +8,9 @@ movieController.route("/")
 .get(async function(req,res){
     res.json(await movieService.getAllMovies());
 })
-.post(async function(req,res){
-   console.log(req.body);
-    res.json(movieService.addNewMovie(req.body))
+.post(upload.single('moviePoster'),async function(req,res){
+   
+   res.json(movieService.addNewMovie(req.body,req.file))
 })
 movieController.route("/upcoming")
 .get(async function(req,res) {

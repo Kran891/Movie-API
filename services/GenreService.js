@@ -3,7 +3,7 @@ const genres = require("../models/Genre");
 var genreServices = {};
 genreServices.addGenre = async (name) => {
     const genre = new genres({ name: name })
-    await genre.save()
+    await genre.save();
     console.log(genre);
     return genre._id;
 }

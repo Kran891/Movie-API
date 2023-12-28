@@ -16,7 +16,8 @@ require('dotenv').config();
 const app=express();
 
 mongoose.connect("mongodb://localhost:27017/"+process.env.DBNAME)
-app.use(bodyParser.json())
+ app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({extended:true}))
 app.use(cookieParser())
 app.use(cors({
     origin: '*',
