@@ -4,12 +4,13 @@ const movieLanguageService = require("../services/MovieLanguageService");
 const movieOTTService = require("../services/MovieOTTService");
 
 const movieTypeService = require("../services/MovieTypeService");
+const movieImageService = require("./MovieImageService");
 const wishListService = require('../services/WishListService');
 
 var movieService = {};
-movieService.addNewMovie = async(data)=>{
+movieService.addNewMovie = async(data,poster)=>{
  const typeId = await movieService.addType(data.movieType);
-
+ const posterId=await movieImageService.addnewImage(poster);
  console.log(typeId);
  const movie = new movies({
     name:data.name,
@@ -17,12 +18,13 @@ movieService.addNewMovie = async(data)=>{
     rating:data.rating,
     releaseDate:data.releaseDate,
     typeId : typeId,
-    description:data.description
+    description:data.description,
+    posterId:posterId
   });
   await movie.save();
-    await movieGenreService.addMovieGenres(movie._id,data.genres);
-    await movieLanguageService.addMovieLanguages(movie._id,data.languages);
-    await movieOTTService.addMovieOTTs(movie._id,data.ott);
+    await movieGenreService.addMovieGenres(movie._id,JSON.parse(data.genres));
+    await movieLanguageService.addMovieLanguages(movie._id,JSON.parse(data.languages));
+    await movieOTTService.addMovieOTTs(movie._id,JSON.parse(data.ott));
 }
 movieService.addType = async (name) => {
   let movieType = await movieTypeService.findMovieTypeByName(name);
@@ -33,7 +35,7 @@ movieService.addType = async (name) => {
 }
 
 movieService.findMovieById = async (id) => {
-  let movie = await movies.findOne({_id:id}).populate("typeId")
+  let movie = await movies.findOne({_id:id}).populate("typeId").populate("posterId")
   if(movie === null){
     return null;
   }
@@ -47,7 +49,7 @@ async function fillMovie(movie) {
 }
 movieService.getAllMovies=async ()=>{
   let movieList;
-  movieList=await movies.find({releaseDate:{$lte:new Date()}}).sort({releaseDate:'desc'}).populate("typeId")
+  movieList=await movies.find({releaseDate:{$lte:new Date()}}).sort({releaseDate:'desc'}).populate("typeId").populate("posterId")
   return await getAllMovies(movieList)
 }
 movieService.getAllMoviesByUserId=async (uid)=>{

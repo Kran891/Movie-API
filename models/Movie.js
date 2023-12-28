@@ -10,7 +10,8 @@ const MovieSchema = new mongoose.Schema({
    genres:[String],
    languages:[String],
    description:String,
-   ott:{}
+   ott:{},
+   posterId:{type:mongoose.Schema.Types.ObjectId,ref:"movieimage"}
 })
 const movies = mongoose.model("movie", MovieSchema)
 module.exports = movies
