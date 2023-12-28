@@ -20,7 +20,7 @@ userRolesService.addUserRole=async(userId,role)=>{
 }
 userRolesService.getUserRole = async (userId)=>{
   const roles=await userRoles.findOne({userId:userId},{roleId:1}).populate("roleId");
-  const data= roles.roleId.name
+  const data= roles.roleId.role
   return data
 }
 module.exports=userRolesService;

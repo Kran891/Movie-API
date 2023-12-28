@@ -4,6 +4,7 @@ const movieLanguageService = require("../services/MovieLanguageService");
 const movieOTTService = require("../services/MovieOTTService");
 
 const movieTypeService = require("../services/MovieTypeService");
+const wishListService = require('../services/WishListService');
 
 var movieService = {};
 movieService.addNewMovie = async(data)=>{
@@ -74,4 +75,8 @@ movieService.findMoviesByLanguageByType = async (movieType,languageName) => {
   moviesList = moviesList.filter(x => x.movieId.typeId.equals(movieTypeId._id));
   return moviesList;
 };
+movieService.getAllWishListsByUser = async (id) => {
+  const wishLists = await wishListService.getAllWishListsByUser(id);
+  return getAllMovies(wishLists);
+}
 module.exports = movieService;

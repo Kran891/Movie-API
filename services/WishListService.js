@@ -2,12 +2,12 @@ const wishLists = require("../models/Wishlist");
 
 var wishListService = {};
 
-wishListService.addToWishList = async (userId,movieId) => {
-   let wishList = await wishLists.findOne({userId:userId,movieId:movieId},{_id:1})
+wishListService.addToWishList = async (data) => {
+   let wishList = await wishLists.findOne({userId:data.id,movieId:data.mid},{_id:1})
    if(!wishList){
         wishList = new wishLists({
-            userId : userId,
-            movieId: movieId
+            userId : data.id,
+            movieId: data.mid
         });
         await wishList.save();
         return wishList;
@@ -30,3 +30,4 @@ wishListService.getAllWishListsByUser = async (userId) => {
     });
     return userWishListMovieIds;
 } 
+module.exports = wishListService;

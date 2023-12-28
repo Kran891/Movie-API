@@ -10,6 +10,7 @@ const movieController = require('./controllers/MovieController')
 const genreController = require('./controllers/GenreController')
 const movieTypeController = require('./controllers/MovieTypeController')
 const typeController = require('./controllers/TypeController')
+const wishListController = require('./controllers/WishListController')
 
 require('dotenv').config();
 
@@ -31,6 +32,7 @@ app.use("/movies",movieController)
 app.use("/genres",genreController)
 app.use("/movietypes",movieTypeController)
 app.use("/types",typeController)
+app.use("/wishlist", wishListController)
 app.listen(process.env.PORT,()=>{
     console.log("Running on PORT =>",process.env.PORT);
     console.log(`http://localhost:${process.env.PORT}/`);
