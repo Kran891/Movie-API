@@ -34,13 +34,13 @@ For more detailed information, you can check out the [Movie-API](https://github.
 Clone the project
 
 ```bash
-  git clone https://github.com/Kran891/Travel-Agency-API.git
+  [git clone https://github.com/Kran891/Travel-Agency-API.git](https://github.com/Kran891/Movie-API)
 ```
 
 Go to the project directory
 
 ```bash
-  cd Travel-Agency-API
+  cd Movie-API
 ```
 
 Install dependencies
@@ -61,6 +61,10 @@ Start the server for any API
 - POST /movies: Add a new movie.
 - PUT /movies/:id: Update a movie by ID.
 - DELETE /movies/:id: Delete a movie by ID
+
+## Frontend Reference
+
+For Frontend reference, you can check out the [Movie-React](https://github.com/Kran891/movie-react.git) repository on GitHub.
 
 ## Authors
 
