@@ -34,7 +34,7 @@ For more detailed information, you can check out the [Movie-API](https://github.
 Clone the project
 
 ```bash
-  [git clone https://github.com/Kran891/Travel-Agency-API.git](https://github.com/Kran891/Movie-API)
+  git clone https://github.com/Kran891/Movie-API.git
 ```
 
 Go to the project directory
